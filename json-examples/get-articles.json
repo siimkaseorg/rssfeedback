@@ -1,0 +1,11 @@
+[
+  {
+    "articleId": 1,
+    "title": "Uudise Pealkiri",
+    "description": "Siia tuleb lead tekst ehk artikli sissejuhatus...",
+    "articleImage": "",
+    "articleLink": "https://postimees.ee/article/123",
+    "portalName": "Postimees",
+    "categoryName": "Poliitika"
+  }
+]

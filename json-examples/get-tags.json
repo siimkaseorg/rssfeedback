@@ -1,0 +1,37 @@
+[
+  {
+    "tagId": 1,
+    "tagName": "Poliitika",
+    "tagIsChosen": false
+  },
+  {
+    "tagId": 2,
+    "tagName": "Kultuur",
+    "tagIsChosen": false
+  },
+  {
+    "tagId": 3,
+    "tagName": "Sport",
+    "tagIsChosen": false
+  },
+  {
+    "tagId": 4,
+    "tagName": "Välismaa",
+    "tagIsChosen": false
+  },
+  {
+    "tagId": 5,
+    "tagName": "Krimi",
+    "tagIsChosen": false
+  },
+  {
+    "tagId": 6,
+    "tagName": "Majandus",
+    "tagIsChosen": false
+  },
+  {
+    "tagId": 7,
+    "tagName": "Uudised",
+    "tagIsChosen": false
+  }
+]
