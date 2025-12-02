@@ -1,6 +1,6 @@
 package ee.valiit.rssfeedback.persitence.user;
 
-import ee.valiit.rssfeedback.controller.LoginResponse;
+import ee.valiit.rssfeedback.controller.login.dto.LoginResponse;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)

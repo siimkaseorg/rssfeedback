@@ -1,10 +1,11 @@
 package ee.valiit.rssfeedback.service;
 
-import ee.valiit.rssfeedback.controller.LoginResponse;
+import ee.valiit.rssfeedback.controller.login.dto.LoginResponse;
 import ee.valiit.rssfeedback.infrastructure.exception.ForbiddenException;
 import ee.valiit.rssfeedback.persitence.user.User;
 import ee.valiit.rssfeedback.persitence.user.UserMapper;
 import ee.valiit.rssfeedback.persitence.user.UserRepository;
+import ee.valiit.rssfeedback.persitence.userfeedselection.UserFeedSelectionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,7 @@
-package ee.valiit.rssfeedback.controller;
+package ee.valiit.rssfeedback.controller.login;
 
 
+import ee.valiit.rssfeedback.controller.login.dto.LoginResponse;
 import ee.valiit.rssfeedback.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

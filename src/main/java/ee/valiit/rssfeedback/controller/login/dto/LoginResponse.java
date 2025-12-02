@@ -1,4 +1,4 @@
-package ee.valiit.rssfeedback.controller;
+package ee.valiit.rssfeedback.controller.login.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

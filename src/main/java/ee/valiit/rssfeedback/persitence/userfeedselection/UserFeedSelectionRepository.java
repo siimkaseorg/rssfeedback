@@ -1,9 +1,7 @@
-package ee.valiit.rssfeedback.service;
+package ee.valiit.rssfeedback.persitence.userfeedselection;
 
-import ee.valiit.rssfeedback.persitence.userfeedselection.UserFeedSelection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface UserFeedSelectionRepository extends JpaRepository<UserFeedSelection, Integer> {
 
