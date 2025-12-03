@@ -1,9 +1,11 @@
 package ee.valiit.rssfeedback.service;
 
+import ee.valiit.rssfeedback.controller.category.dto.CategoryInfo;
 import ee.valiit.rssfeedback.persitence.category.Category;
+import ee.valiit.rssfeedback.persitence.category.CategoryMapper;
+import ee.valiit.rssfeedback.persitence.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -12,10 +14,12 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
-    public void findCategories() {
+    public List<CategoryInfo> findCategories() {
         List<Category> categories = categoryRepository.findAll();
-
+        List<CategoryInfo> categoryInfos = categoryMapper.toCategoryInfos(categories);
+        return categoryInfos;
     }
 
 }
