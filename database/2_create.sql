@@ -9,9 +9,11 @@ CREATE TABLE article (
                          category_id int  NOT NULL,
                          title varchar(255)  NOT NULL,
                          description varchar(1000)  NOT NULL,
+                         article_link varchar(255)  NOT NULL,
                          image_link varchar(255)  NOT NULL,
                          status varchar(3)  NOT NULL,
                          guid varchar(500)  NOT NULL,
+                         article_date date  NOT NULL,
                          created_at date  NOT NULL,
                          CONSTRAINT article_ak_1 UNIQUE (guid) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                          CONSTRAINT article_pk PRIMARY KEY (id)

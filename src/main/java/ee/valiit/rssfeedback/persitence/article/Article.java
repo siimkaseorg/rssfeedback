@@ -42,6 +42,11 @@ public class Article {
 
     @Size(max = 255)
     @NotNull
+    @Column(name = "article_link", nullable = false)
+    private String articleLink;
+
+    @Size(max = 255)
+    @NotNull
     @Column(name = "image_link", nullable = false)
     private String imageLink;
 
@@ -54,6 +59,10 @@ public class Article {
     @NotNull
     @Column(name = "guid", nullable = false, length = 500)
     private String guid;
+
+    @NotNull
+    @Column(name = "article_date", nullable = false)
+    private LocalDate articleDate;
 
     @NotNull
     @Column(name = "created_at", nullable = false)
