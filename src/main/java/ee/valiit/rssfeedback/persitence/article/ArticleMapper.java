@@ -1,5 +1,6 @@
 package ee.valiit.rssfeedback.persitence.article;
 
+import ee.valiit.rssfeedback.controller.article.dto.ArticleFeedInfo;
 import ee.valiit.rssfeedback.controller.rss.dto.RssItem;
 import ee.valiit.rssfeedback.infrastructure.util.DateConverter;
 import ee.valiit.rssfeedback.persitence.category.Category;
@@ -10,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import org.mapstruct.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, imports = {DateConverter.class, LocalDate.class})
 public interface ArticleMapper {
@@ -25,6 +27,32 @@ public interface ArticleMapper {
     @Mapping(constant = "A", target = "status")
     @Mapping(expression = "java(LocalDate.now())", target = "createdAt")
     Article toArticle(RssItem rssItem);
+
+
+//    private Integer articleId;
+//    private String portalName;
+//    private Integer categoryId;
+//    private String categoryName;
+//    private String title;
+//    private String description;
+//    private String articleLink;
+//    private String imageLink;
+//    private Boolean isInToReadList;
+
+
+    @Mapping(source = "id", target = "articleId")
+    @Mapping(constant = "portalName", target = "portalName")
+    @Mapping(source = "category.id", target = "categoryId")
+    @Mapping(source = "category.name", target = "categoryName")
+    @Mapping(source = "title", target = "title")
+    @Mapping(source = "description", target = "description")
+    @Mapping(source = "articleLink", target = "articleLink")
+    @Mapping(source = "imageLink", target = "imageLink")
+    @Mapping(source = "isInToReadList", target = "isInToReadList")
+    ArticleFeedInfo toArticleFeedInfo(Article article);
+
+
+   List <ArticleFeedInfo> toArticleFeedInfos(List<Article> articles);
 
 
 }

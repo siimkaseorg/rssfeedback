@@ -12,6 +12,9 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     boolean articleExistsBy(String guid);
 
     @Query("select a from Article a where a.category.id in :categoryIds")
-    List<Article> findArticlesBy(@Param("categoryIds") List<Integer> categoryIds);
+    List<Article> findArticlesBy(List<Integer> categoryIds);
+
+//    @Query("SELECT count(a) > 0 FROM Article a JOIN UserFeedSelection u WHERE a.id in :articlesId AND u.user.id = :userId")
+//    boolean isArticleInToReadList (@Param("articlesId") List<Integer> articlesId, @Param("userId") Integer userId)
 
 }
