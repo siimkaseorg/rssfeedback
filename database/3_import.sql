@@ -12,10 +12,10 @@ INSERT INTO rss.category (id, name) VALUES (default, 'Uudised');
 INSERT INTO rss.category (id, name) VALUES (default, 'Välismaa');
 INSERT INTO rss.category (id, name) VALUES (default, 'Majandus');
 
-INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'ERR', 'errxmllink', 'A');
-INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'Delfi', 'delfixmllink', 'A');
+INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'ERR', 'https://www.err.ee/rss', 'A');
+INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'Delfi', 'https://feeds2.feedburner.com/delfiuudised', 'A');
 INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'Postimees', 'https://www.postimees.ee/rss', 'A');
-INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'Äripäev', 'aripäevxmllink', 'A');
+INSERT INTO rss.portal (id, name, xml_link, status) VALUES (default, 'Äripäev', 'https://www.aripaev.ee/rss', 'A');
 
 
 

@@ -46,6 +46,7 @@ dependencies {
 
     // Rome for RSS/Atom feed parsing
     implementation 'com.rometools:rome:2.1.0'
+    implementation 'com.rometools:rome-modules:2.1.0'
 }
 
 compileJava {
