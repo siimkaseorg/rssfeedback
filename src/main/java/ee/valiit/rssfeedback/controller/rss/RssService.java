@@ -52,7 +52,7 @@ public class RssService {
     // @Scheduled(cron = "0 */15 * * * *")
     public void importAllArticles() {
         for (Portal portal : portalRepository.findAll()) {
-            if (portal.getXmlLink() != null && !portal.getXmlLink().isEmpty()) {
+            if (!portal.getXmlLink().isEmpty()) {
                 importPortalArticles(portal);
             }
         }
@@ -225,13 +225,13 @@ public class RssService {
         }
 
         return RssItem.builder()
-                .guid(guid)
-                .categoryName(categoryName)
+                .guid(geSanitizedString(guid))
+                .categoryName(geSanitizedString(categoryName))
                 .articleDate(articleDate)
-                .title(entry.getTitle())
-                .description(description)
-                .articleLink(entry.getLink())
-                .imageLink(imageLink)
+                .title(geSanitizedString(entry.getTitle()))
+                .description(geSanitizedString(description))
+                .articleLink(geSanitizedString(entry.getLink()))
+                .imageLink(geSanitizedString(imageLink))
                 .build();
     }
 
@@ -261,6 +261,10 @@ public class RssService {
 
         // 3) Nothing found
         return "";
+    }
+
+    private String geSanitizedString(String value) {
+        return value.replace("\n", "").trim();
     }
 
 }
