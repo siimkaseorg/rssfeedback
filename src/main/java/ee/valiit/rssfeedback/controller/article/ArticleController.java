@@ -1,5 +1,6 @@
 package ee.valiit.rssfeedback.controller.article;
 
+import ee.valiit.rssfeedback.controller.article.dto.ArticleFeedInfo;
 import ee.valiit.rssfeedback.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,9 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("/articles")
-    public void getArticles(@RequestParam Integer userId, @RequestParam List<Integer> categoryIds) {
-        articleService.getArticles(userId, categoryIds);
+    public List<ArticleFeedInfo> getArticles(@RequestParam Integer userId, @RequestParam List<Integer> categoryIds) {
+        List<ArticleFeedInfo> articles = articleService.getArticles(userId, categoryIds);
+        return articles;
     }
 
 }

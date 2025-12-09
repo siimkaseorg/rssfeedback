@@ -1,8 +1,6 @@
 package ee.valiit.rssfeedback.controller.article.dto;
 
 import ee.valiit.rssfeedback.persitence.article.Article;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +22,5 @@ public class ArticleFeedInfo implements Serializable {
     private String description;
     private String articleLink;
     private String imageLink;
-    private Boolean isInToReadList;
+    private Boolean isInReadList;
 }

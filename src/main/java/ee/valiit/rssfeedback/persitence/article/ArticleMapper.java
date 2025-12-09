@@ -3,11 +3,6 @@ package ee.valiit.rssfeedback.persitence.article;
 import ee.valiit.rssfeedback.controller.article.dto.ArticleFeedInfo;
 import ee.valiit.rssfeedback.controller.rss.dto.RssItem;
 import ee.valiit.rssfeedback.infrastructure.util.DateConverter;
-import ee.valiit.rssfeedback.persitence.category.Category;
-import ee.valiit.rssfeedback.persitence.portal.Portal;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.mapstruct.*;
 
 import java.time.LocalDate;
@@ -41,14 +36,14 @@ public interface ArticleMapper {
 
 
     @Mapping(source = "id", target = "articleId")
-    @Mapping(constant = "portalName", target = "portalName")
+    @Mapping(source = "portal.name", target = "portalName")
     @Mapping(source = "category.id", target = "categoryId")
     @Mapping(source = "category.name", target = "categoryName")
     @Mapping(source = "title", target = "title")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "articleLink", target = "articleLink")
     @Mapping(source = "imageLink", target = "imageLink")
-    @Mapping(source = "isInToReadList", target = "isInToReadList")
+    @Mapping(constant = "false", target = "isInReadList")
     ArticleFeedInfo toArticleFeedInfo(Article article);
 
 

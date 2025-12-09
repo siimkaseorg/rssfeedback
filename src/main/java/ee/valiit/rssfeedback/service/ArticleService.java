@@ -1,13 +1,17 @@
 package ee.valiit.rssfeedback.service;
 
+import ee.valiit.rssfeedback.controller.article.dto.ArticleFeedInfo;
 import ee.valiit.rssfeedback.persitence.article.Article;
+import ee.valiit.rssfeedback.persitence.article.ArticleMapper;
 import ee.valiit.rssfeedback.persitence.article.ArticleRepository;
+import ee.valiit.rssfeedback.persitence.laterread.LaterReadRepository;
+import ee.valiit.rssfeedback.persitence.userfeedselection.UserFeedSelection;
+import ee.valiit.rssfeedback.persitence.userfeedselection.UserFeedSelectionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,13 +19,54 @@ import java.util.List;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final ArticleMapper articleMapper;
+    private final UserFeedSelectionRepository userFeedSelectionRepository;
+    private final LaterReadRepository laterReadRepository;
 
 
-    public void getArticles(Integer userId, List<Integer> categoryIds) {
-        List<Article> articles = articleRepository.findArticlesBy(categoryIds);
-        // todo: mappida entity List ümber DTO listiks
+    public List<ArticleFeedInfo> getArticles(Integer userId, List<Integer> categoryIds) {
+        List<Article> articles = handleGetArticles(userId, categoryIds);
+        List<ArticleFeedInfo> articleFeedInfos = articleMapper.toArticleFeedInfos(articles);
+        handleUpdateIsInReadListInfo(userId, articleFeedInfos);
+        return articleFeedInfos;
+    }
 
-        // todo: kui userId ei ole '0', siis käia see DTO list läbi ükshaaval (for loop)
-        // todo: Vaadata user_feed_selection tablist, cas antus userId-l on valitud categoryId olemas (exists)
+    private void handleUpdateIsInReadListInfo(Integer userId, List<ArticleFeedInfo> articleFeedInfos) {
+        if (isUserSpecificQuery(userId)) {
+            for (ArticleFeedInfo articleFeedInfo : articleFeedInfos) {
+                boolean isInReadList = laterReadRepository.articleExistsInLaterReadBy(userId, articleFeedInfo.getArticleId());
+                articleFeedInfo.setIsInReadList(isInReadList);
+            }
+        }
+    }
+
+    private List<Article> handleGetArticles(Integer userId, List<Integer> categoryIds) {
+        List<Article> articles = new ArrayList<>();
+        if (isUserSpecificQuery(userId)) {
+            addUserFeedSelectedArticles(userId, categoryIds, articles);
+        } else  {
+            articles = getAllArticlesBy(categoryIds);
+        }
+        return articles;
+    }
+
+    private List<Article> getAllArticlesBy(List<Integer> categoryIds) {
+        List<Article> articles;
+        articles = articleRepository.findArticlesBy(categoryIds);
+        return articles;
+    }
+
+    private void addUserFeedSelectedArticles(Integer userId, List<Integer> categoryIds, List<Article> articles) {
+        List<UserFeedSelection> userFeedSelections = userFeedSelectionRepository.findUserFeedSelectionsBy(userId, categoryIds);
+
+        for (UserFeedSelection userFeedSelection : userFeedSelections) {
+            List<Article> userArticles = articleRepository.findArticlesBy(userFeedSelection.getPortal(), userFeedSelection.getCategory(), LocalDate.now());
+            articles.addAll(userArticles);
+        }
+    }
+
+    private static boolean isUserSpecificQuery(Integer userId) {
+        return !userId.equals(0);
     }
 }
+
